@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}<h3>Article search</h3>{% end %}
+{% block body %}
+    <form action='' method="post">
+        <label for="q">search here: </label>
+        <input type="text" name="q"></input>
+        <input type="submit" value="search">
+    </form>
+    <br>
+    {% if response %}
+
+        {% for item in response['hits']['hits'] %}
+            {% set url = reverse_url('article', item['_source']['slug']) %}
+            <a href="{{ url }}">{{ item['_source']['title'] }}</a><br>
+            {{ item['_source']['news'] }}
+            <br><br>
+        {% end %}
+    {% end %}
+{% end %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}<h3>Home</h3>{% end %}
+{% block body %}
+        {% if entries %}
+                {% for entry in entries %}
+                                {% set url = reverse_url('article', entry['slug']) %}
+                        <a href="{{ url }}">{{ entry["title"] }}</a> {{ entry["time"] }} <br>
+                                <div class='content-markdown'>{{ entry['news'] }} <br></div>
+                                {% set url = reverse_url('show_image', entry['picture']) %}
+                        <a href="{{ url }}"><img src="{{ url }}" style="max-width: 400px;"></a>
+                        <br><br>
+                {% end %}
+        {% end %}
+
+        <script
+                src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.2/marked.min.js"></script>
+                <script type="text/javascript">
+                $(document).ready(function(){
+                        $(".content-markdown").each(function(){
+                                var content = $(this).text()
+                                console.log(content)
+                                var markedContent = marked(content)
+                                $(this).html(markedContent)
+                        })
+                })
+        </script>
+  {% end %}

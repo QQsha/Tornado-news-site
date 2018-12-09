@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <p><a href="/">Home</a> <a href="/upload">Upload</a> <a href="/search">Search</a></p>
+    {% block head %}{% end %} 
+  </head>
+  <body>
+    {% block body %}
+        <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.2/marked.min.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+                    $(".content-markdown").each(function(){
+                            var content = $(this).text()
+                            console.log(content)
+                            var markedContent = marked(content)
+                            $(this).html(markedContent)
+                    })
+            })
+        </script>
+    {% end %}
+  </body>
+</html>
